@@ -3,11 +3,12 @@ include 'config/config.php';
 include 'includes/header.php';
 ?>
 
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="text-center mb-5 mt-4" data-aos="fade-up">
         <h2 class="fw-bold text-dark">Daftar Pengumuman Resmi</h2>
         <p class="text-muted">Informasi terbaru mengenai kegiatan dan pengumuman SDN Dukuhbenda 02</p>
-        <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; border-radius: 2px; opacity: 1;">
+        <hr class="mx-auto section-rule">
     </div>
 
     <div class="row justify-content-center">
@@ -52,5 +53,6 @@ include 'includes/header.php';
         </div>
     </div>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>

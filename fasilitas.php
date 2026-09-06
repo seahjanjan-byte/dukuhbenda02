@@ -3,11 +3,12 @@ include 'config/config.php';
 include 'includes/header.php';
 ?>
 
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="text-center mb-5" data-aos="fade-up">
         <h2 class="fw-bold text-dark">Fasilitas Sekolah</h2>
         <p class="text-muted">Sarana dan prasarana pendukung kegiatan belajar mengajar di SDN dukuhbenda02</p>
-        <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; border-radius: 2px; opacity: 1;">
+        <hr class="mx-auto section-rule">
     </div>
 
     <div class="row g-4">
@@ -29,7 +30,7 @@ include 'includes/header.php';
                             ?>
                             <img src="<?= htmlspecialchars($gambar, ENT_QUOTES, 'UTF-8'); ?>" class="card-img-top" style="height: 240px; object-fit: cover;" alt="<?= htmlspecialchars($f['nama_fasilitas'], ENT_QUOTES, 'UTF-8'); ?>">
                             <div class="card-img-overlay d-flex align-items-end p-0">
-                                <div class="w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.7));">
+                                <div class="w-100 p-3 facility-overlay">
                                     <h5 class="text-white fw-bold mb-0"><?= htmlspecialchars($f['nama_fasilitas'], ENT_QUOTES, 'UTF-8'); ?></h5>
                                 </div>
                             </div>
@@ -54,5 +55,7 @@ include 'includes/header.php';
         <?php endif; ?>
     </div>
 </div>
+
+</main>
 
 <?php include 'includes/footer.php'; ?>

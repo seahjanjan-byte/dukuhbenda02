@@ -16,6 +16,7 @@ if (!$b) {
 }
 ?>
 
+<main class="page-shell article-page">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -50,7 +51,7 @@ if (!$b) {
                 </div>
             <?php endif; ?>
 
-            <div class="news-content text-justify" style="font-size: 1.15rem; line-height: 2; color: #334155;">
+            <div class="news-content text-justify article-body">
                 <?= nl2br(htmlspecialchars($b['isi'], ENT_QUOTES, 'UTF-8')); ?>
             </div>
 
@@ -63,5 +64,6 @@ if (!$b) {
         </div>
     </div>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>

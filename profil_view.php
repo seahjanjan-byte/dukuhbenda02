@@ -32,12 +32,13 @@ if ($kat == 'visi' || $kat == 'misi' || $kat == 'visi-misi') {
 }
 ?>
 
+<main class="page-shell article-page">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="text-center mb-5" data-aos="fade-down">
                 <h2 class="fw-bold text-dark text-uppercase"><?= htmlspecialchars($judul, ENT_QUOTES, 'UTF-8'); ?></h2>
-                <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; border-radius: 2px; opacity: 1;">
+                <hr class="mx-auto section-rule">
             </div>
 
             <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white" data-aos="fade-up">
@@ -80,7 +81,7 @@ if ($kat == 'visi' || $kat == 'misi' || $kat == 'visi-misi') {
                         </div>
                     <?php endif; ?>
 
-                    <div class="content-text" style="line-height: 1.9; color: #374151; font-size: 1.1rem; text-align: justify;">
+                    <div class="content-text article-body">
                         <?= nl2br(htmlspecialchars($d['isi'], ENT_QUOTES, 'UTF-8')); ?>
                     </div>
                 <?php endif; ?>
@@ -95,5 +96,6 @@ if ($kat == 'visi' || $kat == 'misi' || $kat == 'visi-misi') {
         </div>
     </div>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>

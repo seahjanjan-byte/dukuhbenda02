@@ -2,11 +2,12 @@
 include 'config/config.php';
 include 'includes/header.php';
 ?>
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="text-center mb-5 mt-4" data-aos="fade-up">
         <h2 class="fw-bold">Berita & Kegiatan</h2>
         <p class="text-muted">Informasi terbaru seputar aktivitas SDN DukuhBenda 02</p>
-        <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; opacity: 1;">
+        <hr class="mx-auto section-rule">
     </div>
     <div class="row g-4">
         <?php
@@ -38,4 +39,5 @@ include 'includes/header.php';
         <?php endif; ?>
     </div>
 </div>
+</main>
 <?php include 'includes/footer.php'; ?>

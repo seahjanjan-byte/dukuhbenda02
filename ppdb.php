@@ -7,12 +7,13 @@ $sql = mysqli_query($conn, "SELECT * FROM ppdb LIMIT 1");
 $d = mysqli_fetch_array($sql);
 ?>
 
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <?php if ($d && $d['status'] == 'buka'): ?>
         <div class="text-center mb-5 mt-4" data-aos="fade-up">
             <h2 class="fw-bold text-primary">Penerimaan Peserta Didik Baru (PPDB)</h2>
             <p class="text-muted">Selamat datang calon siswa-siswi cerdas SDN Dukuhbenda 02!</p>
-            <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; border-radius: 2px; opacity: 1;">
+            <hr class="mx-auto section-rule">
         </div>
 
         <div class="row justify-content-center">
@@ -50,5 +51,6 @@ $d = mysqli_fetch_array($sql);
         </div>
     <?php endif; ?>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>

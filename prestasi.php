@@ -6,11 +6,12 @@ include 'includes/header.php';
 $cat = isset($_GET['cat']) ? $_GET['cat'] : 'semua';
 ?>
 
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="text-center mb-5 mt-4" data-aos="fade-up">
         <h2 class="fw-bold">Prestasi Sekolah</h2>
         <p class="text-muted">Kebanggaan dan pencapaian siswa-siswi SDN Dukuhbenda 02</p>
-        <hr class="mx-auto" style="width: 80px; height: 4px; background-color: #3b82f6; opacity: 1;">
+        <hr class="mx-auto section-rule">
     </div>
 
     <div class="d-flex justify-content-center gap-2 mb-5" data-aos="fade-up">
@@ -55,5 +56,6 @@ $cat = isset($_GET['cat']) ? $_GET['cat'] : 'semua';
         <?php endif; ?>
     </div>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>

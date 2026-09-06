@@ -9,11 +9,12 @@ function get_youtube_embed($url)
 }
 ?>
 
+<main class="page-shell">
 <div class="container py-5 mt-5 pt-lg-5">
     <div class="text-center mb-5">
         <h2 class="fw-bold">Galeri Kegiatan</h2>
         <p class="text-muted">Dokumentasi momen berharga di SDN Dukuhbenda 02</p>
-        <hr class="mx-auto" style="width: 100px; height: 3px; background-color: #3b82f6; opacity: 1;">
+        <hr class="mx-auto section-rule gallery-rule">
     </div>
 
     <div class="row g-4">
@@ -66,5 +67,6 @@ function get_youtube_embed($url)
         <?php } ?>
     </div>
 </div>
+</main>
 
 <?php include 'includes/footer.php'; ?>
