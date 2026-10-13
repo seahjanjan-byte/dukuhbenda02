@@ -3,6 +3,8 @@ include '../../../config/config.php';
 include '../../cek_session.php';
 include '../../database_helper.php';
 
+require_valid_csrf_token();
+
 if (isset($_POST['update'])) {
     $admin_id = $_SESSION['admin_id'] ?? '';
 
@@ -20,20 +22,20 @@ if (isset($_POST['update'])) {
     $cek_v = db_fetch_one($conn, "SELECT id_profil FROM profil WHERE kategori = ?", 's', ['visi']);
     if ($cek_v) {
         // Jika sudah ada, update isi dan admin pengelola
-        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sis', [$visi, $admin_id, 'visi']);
+        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sss', [$visi, $admin_id, 'visi']);
     } else {
         // Jika belum ada, buat baris baru dengan ID String
-        db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi) VALUES (?, ?, ?, ?, ?)", 'sisss', ['PFL_VISI', $admin_id, 'visi', 'Visi Sekolah', $visi]);
+        db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi) VALUES (?, ?, ?, ?, ?)", 'sssss', ['PFL_VISI', $admin_id, 'visi', 'Visi Sekolah', $visi]);
     }
 
     // 4. PROSES DATA MISI
     $cek_m = db_fetch_one($conn, "SELECT id_profil FROM profil WHERE kategori = ?", 's', ['misi']);
     if ($cek_m) {
         // Jika sudah ada, update
-        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sis', [$misi, $admin_id, 'misi']);
+        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sss', [$misi, $admin_id, 'misi']);
     } else {
         // Jika belum ada, buat baris baru
-        db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi) VALUES (?, ?, ?, ?, ?)", 'sisss', ['PFL_MISI', $admin_id, 'misi', 'Misi Sekolah', $misi]);
+        db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi) VALUES (?, ?, ?, ?, ?)", 'sssss', ['PFL_MISI', $admin_id, 'misi', 'Misi Sekolah', $misi]);
     }
 
     header("Location: ../profil/index.php?status=success");

@@ -1,6 +1,6 @@
-<?php 
+<?php
 include '../../../config/config.php';
-include '../../cek_session.php'; 
+include '../../cek_session.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -53,6 +53,7 @@ include '../../cek_session.php';
                 </div>
                 <div class="card-body p-4">
                     <form action="proses.php" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <input type="hidden" name="id" value="<?= $d['id_profil'] ?? ''; ?>">
 
                         <div class="mb-4">

@@ -27,6 +27,7 @@ include '../../cek_session.php'; ?>
                 </div>
                 <div class="card-body p-4">
                     <form action="proses.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Judul Pengumuman</label>
                             <input type="text" name="judul" class="form-control rounded-pill" required>
@@ -57,7 +58,8 @@ include '../../cek_session.php'; ?>
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary px-5 rounded-pill shadow-sm">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02">
                                 <i class="bi bi-check-circle me-2"></i> Simpan Pengumuman
                             </button>
                         </div>

@@ -48,6 +48,7 @@ include '../../cek_session.php'; ?>
                         </div>
 
                         <div class="d-flex justify-content-end">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
                             <button type="submit" name="simpan" class="btn-primary-dukuhbenda02">
                                 <i class="bi bi-send me-2"></i> Posting Berita Sekarang
                             </button>

@@ -19,6 +19,7 @@ $d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE kategori
             <div class="card-Dukuhbenda 02">
                 <div class="p-4">
                     <form action="proses.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Keterangan Tambahan</label>
                             <textarea name="isi" class="form-control" rows="4"><?= $d['isi']; ?></textarea>
@@ -30,7 +31,10 @@ $d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE kategori
                             <?php endif; ?>
                             <input type="file" name="gambar" class="form-control" accept="image/*">
                         </div>
-                        <button type="submit" name="update" class="btn-primary-Dukuhbenda 02">Simpan Perubahan</button>
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02">Batal</a>
+                            <button type="submit" name="update" class="btn-primary-dukuhbenda02">Simpan Perubahan</button>
+                        </div>
                     </form>
                 </div>
             </div>

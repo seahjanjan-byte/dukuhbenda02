@@ -6,7 +6,7 @@ include '../../database_helper.php';
 
 require_valid_csrf_token();
 
-$aksi = $_POST['aksi'] ?? '';
+$aksi = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $path = "../../../assets/img/";
 
 if ($aksi == 'tambah') {
@@ -26,29 +26,52 @@ if ($aksi == 'tambah') {
     $tipe     = $_POST['tipe_sumber'] ?? '';
     $sumber   = "";
 
-    if ($tipe == 'upload' && !empty($_FILES['file_sumber']['name'])) {
+    if ($tipe === 'upload' && $kategori !== 'foto') {
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
+    }
+    if ($tipe === 'link_youtube' && $kategori !== 'video') {
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
+    }
+
+    if ($tipe === 'upload' && !empty($_FILES['file_sumber']['name'])) {
         $sumber = store_uploaded_image($_FILES['file_sumber'], $path);
         if ($sumber === false) {
             header("Location: index.php?pesan=upload_gagal");
             exit();
         }
-    } else {
+    } elseif ($tipe !== 'upload') {
         $sumber = $_POST['url_sumber'] ?? '';
+    } else {
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
     }
 
-    db_execute($conn, "INSERT INTO galeri (id_galeri, id_admin, judul, kategori, tipe_sumber, sumber) VALUES (?, ?, ?, ?, ?, ?)", 'sissss', [$id_baru, $id_admin, $judul, $kategori, $tipe, $sumber]);
+    db_execute($conn, "INSERT INTO galeri (id_galeri, id_admin, judul, kategori, tipe_sumber, sumber) VALUES (?, ?, ?, ?, ?, ?)", 'ssssss', [$id_baru, $id_admin, $judul, $kategori, $tipe, $sumber]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {
     $id        = $_POST['id'] ?? '';
     $judul     = $_POST['judul'] ?? '';
+    $kategori  = $_POST['kategori'] ?? '';
+    $tipe      = $_POST['tipe_sumber'] ?? '';
     $url_baru  = $_POST['url_sumber'] ?? '';
     $file_baru = $_FILES['file_sumber']['name'] ?? '';
 
     $old = db_fetch_one($conn, "SELECT * FROM galeri WHERE id_galeri = ?", 's', [$id]);
 
+    if ($tipe === 'upload' && $kategori !== 'foto') {
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
+    }
+    if ($tipe === 'link_youtube' && $kategori !== 'video') {
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
+    }
+
     // Opsi 1: Pengguna mengunggah berkas gambar baru
-    if (!empty($file_baru)) {
+    if ($tipe === 'upload' && !empty($file_baru)) {
         $nama_sumber = store_uploaded_image($_FILES['file_sumber'], $path);
         if ($nama_sumber === false) {
             header("Location: index.php?pesan=upload_gagal");
@@ -58,18 +81,23 @@ if ($aksi == 'tambah') {
         if (!empty($old['sumber']) && $old['tipe_sumber'] == 'upload' && is_file($path . $old['sumber'])) {
             remove_uploaded_file($path, $old['sumber']);
         }
-        db_execute($conn, "UPDATE galeri SET judul = ?, tipe_sumber = ?, sumber = ? WHERE id_galeri = ?", 'ssss', [$judul, 'upload', $nama_sumber, $id]);
+        db_execute($conn, "UPDATE galeri SET judul = ?, kategori = ?, tipe_sumber = ?, sumber = ? WHERE id_galeri = ?", 'sssss', [$judul, $kategori, 'upload', $nama_sumber, $id]);
 
         // Opsi 2: Pengguna memasukkan Link/URL baru (misal Youtube)
-    } elseif (!empty($url_baru)) {
+    } elseif ($tipe !== 'upload' && !empty($url_baru)) {
         if (!empty($old['sumber']) && $old['tipe_sumber'] == 'upload' && is_file($path . $old['sumber'])) {
             remove_uploaded_file($path, $old['sumber']);
         }
-        db_execute($conn, "UPDATE galeri SET judul = ?, tipe_sumber = ?, sumber = ? WHERE id_galeri = ?", 'ssss', [$judul, 'link', $url_baru, $id]);
+        db_execute($conn, "UPDATE galeri SET judul = ?, kategori = ?, tipe_sumber = ?, sumber = ? WHERE id_galeri = ?", 'sssss', [$judul, $kategori, $tipe, $url_baru, $id]);
 
         // Opsi 3: Hanya mengubah Judul saja
+    } elseif ($tipe === 'upload' && ($old['tipe_sumber'] ?? '') === 'upload') {
+        db_execute($conn, "UPDATE galeri SET judul = ?, kategori = ?, tipe_sumber = ? WHERE id_galeri = ?", 'ssss', [$judul, $kategori, $tipe, $id]);
+    } elseif ($tipe !== 'upload' && ($old['tipe_sumber'] ?? '') !== 'upload') {
+        db_execute($conn, "UPDATE galeri SET judul = ?, kategori = ?, tipe_sumber = ? WHERE id_galeri = ?", 'ssss', [$judul, $kategori, $tipe, $id]);
     } else {
-        db_execute($conn, "UPDATE galeri SET judul = ? WHERE id_galeri = ?", 'ss', [$judul, $id]);
+        header("Location: index.php?pesan=upload_gagal");
+        exit();
     }
 
     header("Location: index.php");

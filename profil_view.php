@@ -81,9 +81,11 @@ if ($kat == 'visi' || $kat == 'misi' || $kat == 'visi-misi') {
                         </div>
                     <?php endif; ?>
 
-                    <div class="content-text article-body">
-                        <?= nl2br(htmlspecialchars($d['isi'], ENT_QUOTES, 'UTF-8')); ?>
-                    </div>
+                    <?php if ($kat !== 'struktur'): ?>
+                        <div class="content-text article-body">
+                            <?= nl2br(htmlspecialchars($d['isi'], ENT_QUOTES, 'UTF-8')); ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
 
             </div>

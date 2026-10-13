@@ -4,7 +4,9 @@ include '../../cek_session.php';
 include '../../upload_helper.php';
 include '../../database_helper.php';
 
-$aksi     = $_GET['aksi'] ?? '';
+require_valid_csrf_token();
+
+$aksi     = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $admin_id = $_SESSION['admin_id'] ?? '';
 $path     = "../../../assets/img/";
 
@@ -41,7 +43,7 @@ if ($aksi == 'tambah') {
     }
 
     // Insert ke Database
-    db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi, gambar) VALUES (?, ?, ?, ?, ?, ?)", 'sissss', [$id_baru, $admin_id, $kategori, $judul, $isi, $nama_file]);
+    db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi, gambar) VALUES (?, ?, ?, ?, ?, ?)", 'ssssss', [$id_baru, $admin_id, $kategori, $judul, $isi, $nama_file]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {
@@ -68,9 +70,9 @@ if ($aksi == 'tambah') {
         $old = db_fetch_one($conn, "SELECT gambar FROM profil WHERE id_profil = ?", 's', [$id]);
         remove_uploaded_file($path, $old['gambar'] ?? null);
 
-        db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE id_profil = ?", 'ssis', [$isi, $nama_baru, $admin_id, $id]);
+        db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE id_profil = ?", 'ssss', [$isi, $nama_baru, $admin_id, $id]);
     } else {
-        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE id_profil = ?", 'sis', [$isi, $admin_id, $id]);
+        db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE id_profil = ?", 'sss', [$isi, $admin_id, $id]);
     }
 
     header("Location: index.php");

@@ -19,9 +19,6 @@ include '../../cek_session.php'; ?>
         <div class="content-main">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3 class="fw-bold text-dark m-0">Input Data Guru</h3>
-                <a href="index.php" class="btn btn-secondary-Dukuhbenda 02 text-decoration-none">
-                    <i class="bi bi-arrow-left me-2"></i> Batal
-                </a>
             </div>
 
             <div class="card-Dukuhbenda 02">
@@ -30,6 +27,7 @@ include '../../cek_session.php'; ?>
                 </div>
                 <div class="card-Dukuhbenda 02-body p-4">
                     <form action="proses.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="mb-3">
@@ -51,7 +49,8 @@ include '../../cek_session.php'; ?>
                         </div>
 
                         <div class="mt-4 border-top pt-3 d-flex justify-content-end">
-                            <button type="submit" class="btn-primary-Dukuhbenda 02 shadow-sm">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02 shadow-sm">
                                 <i class="bi bi-check-circle me-2"></i> Simpan Data Guru
                             </button>
                         </div>

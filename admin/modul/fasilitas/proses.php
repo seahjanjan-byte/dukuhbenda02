@@ -6,7 +6,7 @@ include '../../database_helper.php';
 
 require_valid_csrf_token();
 
-$aksi = $_POST['aksi'] ?? '';
+$aksi = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $path = "../../../assets/img/";
 
 if ($aksi == 'tambah') {
@@ -36,7 +36,7 @@ if ($aksi == 'tambah') {
 
     // INSERT menyertakan id_fasilitas dan id_admin
     db_execute($conn, "INSERT INTO fasilitas (id_fasilitas, id_admin, nama_fasilitas, deskripsi, gambar)
-                      VALUES (?, ?, ?, ?, ?)", 'sisss', [$id_baru, $id_admin, $nama, $desk, $nama_file]);
+                      VALUES (?, ?, ?, ?, ?)", 'sssss', [$id_baru, $id_admin, $nama, $desk, $nama_file]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {

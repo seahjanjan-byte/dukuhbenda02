@@ -4,11 +4,11 @@ include '../../cek_session.php';
 include '../../upload_helper.php';
 include '../../database_helper.php';
 
+require_valid_csrf_token();
+
 if (isset($_POST['update'])) {
     $admin_id = $_SESSION['admin_id'] ?? '';
-    $isi      = $_POST['isi'] ?? '';
     $gambar   = $_FILES['gambar']['name'] ?? '';
-    $tmp      = $_FILES['gambar']['tmp_name'] ?? '';
     $path     = "../../../assets/img/";
 
     if (!empty($gambar)) {
@@ -22,10 +22,7 @@ if (isset($_POST['update'])) {
         $old = db_fetch_one($conn, "SELECT gambar FROM profil WHERE kategori = ?", 's', ['struktur']);
         remove_uploaded_file($path, $old['gambar'] ?? null);
 
-        // 2. Upload bagan baru
-        $success = db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE kategori = ?", 'ssis', [$isi, $nama_file, $admin_id, 'struktur']);
-    } else {
-        $success = db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sis', [$isi, $admin_id, 'struktur']);
+        db_execute($conn, "UPDATE profil SET gambar = ?, id_admin = ? WHERE kategori = ?", 'sss', [$nama_file, $admin_id, 'struktur']);
     }
 
     // Diarahkan keluar ke halaman utama profil

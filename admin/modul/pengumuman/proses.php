@@ -6,7 +6,7 @@ include '../../database_helper.php';
 
 require_valid_csrf_token();
 
-$aksi = $_POST['aksi'] ?? '';
+$aksi = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $folder_doc = "../../../assets/doc/";
 
 if ($aksi == 'tambah') {
@@ -29,14 +29,21 @@ if ($aksi == 'tambah') {
 
     $nama_file = "";
     if (!empty($dokumen)) {
-        $nama_file = store_uploaded_image($_FILES['dokumen'], $folder_doc);
+        $nama_file = store_uploaded_file($_FILES['dokumen'], $folder_doc, [
+            'pdf' => 'application/pdf',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+        ]);
         if ($nama_file === false) {
             header("Location: index.php?pesan=upload_gagal");
             exit();
         }
     }
 
-    db_execute($conn, "INSERT INTO pengumuman (id_pengumuman, id_admin, judul, isi, dokumen, tanggal, status) VALUES (?, ?, ?, ?, ?, ?, ?)", 'sisssss', [$id_baru, $id_admin, $judul, $isi, $nama_file, $tanggal, $status]);
+    db_execute($conn, "INSERT INTO pengumuman (id_pengumuman, id_admin, judul, isi, dokumen, tanggal, status) VALUES (?, ?, ?, ?, ?, ?, ?)", 'sssssss', [$id_baru, $id_admin, $judul, $isi, $nama_file, $tanggal, $status]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {
@@ -48,7 +55,14 @@ if ($aksi == 'tambah') {
     $file    = $_FILES['dokumen']['name'] ?? '';
 
     if (!empty($file)) {
-        $nama_baru = store_uploaded_image($_FILES['dokumen'], $folder_doc);
+        $nama_baru = store_uploaded_file($_FILES['dokumen'], $folder_doc, [
+            'pdf' => 'application/pdf',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+        ]);
         if ($nama_baru === false) {
             header("Location: index.php?pesan=upload_gagal");
             exit();

@@ -59,7 +59,7 @@ include '../../cek_session.php';
                                         </td>
                                         <td class="fw-semibold">
                                             <?= $d['judul']; ?><br>
-                                            <small class="text-muted" style="font-size: 10px;">ID: <?= $d['id_berita']; ?> | Oleh: <?= $d['username']; ?></small>
+                                            <small class="text-muted" style="font-size: 10px;">Oleh: <?= $d['username']; ?></small>
                                         </td>
                                         <td>
                                             <?php if ($d['status'] == 'tampil'): ?>

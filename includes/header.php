@@ -6,8 +6,8 @@ include_once 'config/config.php';
 $current_page = basename($_SERVER['PHP_SELF']);
 $is_home = ($current_page == 'index.php');
 
-// 3. Tentukan class navbar (transparan di home, biru/solid di halaman lain)
-$nav_class = $is_home ? 'navbar-transparent' : 'scrolled';
+// 3. Gunakan navbar solid agar navigasi selalu terbaca sejak halaman dibuka
+$nav_class = 'scrolled';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -27,41 +27,45 @@ $nav_class = $is_home ? 'navbar-transparent' : 'scrolled';
 
 <body class="<?= htmlspecialchars(($is_home) ? 'home-page' : '', ENT_QUOTES, 'UTF-8'); ?>">
 
-  <nav class="navbar navbar-expand-lg fixed-top <?= htmlspecialchars($nav_class, ENT_QUOTES, 'UTF-8'); ?>" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="<?= htmlspecialchars($base_url . 'index.php', ENT_QUOTES, 'UTF-8'); ?>">
-        <img src="<?= htmlspecialchars($base_url . 'assets/img/logoo.png', ENT_QUOTES, 'UTF-8'); ?>" alt="Logo" width="50" height="50" class="me-2">
-        SDN Dukuhbenda 02
-      </a>
+  <?php if ($is_home): ?>
+    <div class="page-hero-shell">
+    <?php endif; ?>
 
-      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-lg <?= htmlspecialchars($nav_class, ENT_QUOTES, 'UTF-8'); ?>" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="<?= htmlspecialchars($base_url . 'index.php', ENT_QUOTES, 'UTF-8'); ?>">
+          <img src="<?= htmlspecialchars($base_url . 'assets/img/logoo.png', ENT_QUOTES, 'UTF-8'); ?>" alt="Logo" width="50" height="50" class="me-2">
+          SDN Dukuhbenda 02
+        </a>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'index.php', ENT_QUOTES, 'UTF-8'); ?>">Beranda</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Profil
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="profil_view.php?kat=tentang">Tentang Sekolah</a></li>
-              <li><a class="dropdown-item" href="profil_view.php?kat=visi">Visi & Misi</a></li>
-              <li><a class="dropdown-item" href="profil_view.php?kat=sejarah">Sejarah Sekolah</a></li>
-              <li><a class="dropdown-item" href="profil_view.php?kat=struktur">Struktur Organisasi</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'guru.php', ENT_QUOTES, 'UTF-8'); ?>">Guru</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'berita.php', ENT_QUOTES, 'UTF-8'); ?>">Berita</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'prestasi.php', ENT_QUOTES, 'UTF-8'); ?>">Prestasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'fasilitas.php', ENT_QUOTES, 'UTF-8'); ?>">Fasilitas</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'pengumuman.php', ENT_QUOTES, 'UTF-8'); ?>">Pengumuman</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'index.php#hubungi-kami', ENT_QUOTES, 'UTF-8'); ?>">Hubungi Kami</a></li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold text-primary" href="<?= htmlspecialchars($base_url . 'ppdb.php', ENT_QUOTES, 'UTF-8'); ?>">PPDB</a>
-          </li>
-        </ul>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'index.php', ENT_QUOTES, 'UTF-8'); ?>">Beranda</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Profil
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="profil_view.php?kat=tentang">Tentang Sekolah</a></li>
+                <li><a class="dropdown-item" href="profil_view.php?kat=visi">Visi & Misi</a></li>
+                <li><a class="dropdown-item" href="profil_view.php?kat=sejarah">Sejarah Sekolah</a></li>
+                <li><a class="dropdown-item" href="profil_view.php?kat=struktur">Struktur Organisasi</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'guru.php', ENT_QUOTES, 'UTF-8'); ?>">Guru</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'berita.php', ENT_QUOTES, 'UTF-8'); ?>">Berita</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'prestasi.php', ENT_QUOTES, 'UTF-8'); ?>">Prestasi</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'fasilitas.php', ENT_QUOTES, 'UTF-8'); ?>">Fasilitas</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'pengumuman.php', ENT_QUOTES, 'UTF-8'); ?>">Pengumuman</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($base_url . 'index.php#hubungi-kami', ENT_QUOTES, 'UTF-8'); ?>">Hubungi Kami</a></li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold text-primary" href="<?= htmlspecialchars($base_url . 'ppdb.php', ENT_QUOTES, 'UTF-8'); ?>">PPDB</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>

@@ -6,7 +6,7 @@ include '../../database_helper.php';
 
 require_valid_csrf_token();
 
-$aksi     = $_POST['aksi'] ?? '';
+$aksi     = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $admin_id = $_SESSION['admin_id'] ?? ''; // Relasi ke Admin
 $path     = "../../../assets/img/";
 
@@ -36,7 +36,7 @@ if ($aksi == 'tambah') {
     }
 
     // INSERT menyertakan id_slider dan id_admin
-    db_execute($conn, "INSERT INTO slider (id_slider, id_admin, judul, subjudul, gambar) VALUES (?, ?, ?, ?, ?)", 'sisss', [$id_baru, $admin_id, $judul, $subjudul, $nama_file]);
+    db_execute($conn, "INSERT INTO slider (id_slider, id_admin, judul, subjudul, gambar) VALUES (?, ?, ?, ?, ?)", 'sssss', [$id_baru, $admin_id, $judul, $subjudul, $nama_file]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {
@@ -55,9 +55,9 @@ if ($aksi == 'tambah') {
         $old = db_fetch_one($conn, "SELECT gambar FROM slider WHERE id_slider = ?", 's', [$id]);
         remove_uploaded_file($path, $old['gambar'] ?? null);
 
-        db_execute($conn, "UPDATE slider SET judul = ?, subjudul = ?, gambar = ?, id_admin = ? WHERE id_slider = ?", 'sssis', [$judul, $subjudul, $nama_file, $admin_id, $id]);
+        db_execute($conn, "UPDATE slider SET judul = ?, subjudul = ?, gambar = ?, id_admin = ? WHERE id_slider = ?", 'sssss', [$judul, $subjudul, $nama_file, $admin_id, $id]);
     } else {
-        db_execute($conn, "UPDATE slider SET judul = ?, subjudul = ?, id_admin = ? WHERE id_slider = ?", 'ssis', [$judul, $subjudul, $admin_id, $id]);
+        db_execute($conn, "UPDATE slider SET judul = ?, subjudul = ?, id_admin = ? WHERE id_slider = ?", 'ssss', [$judul, $subjudul, $admin_id, $id]);
     }
 
     header("Location: index.php");

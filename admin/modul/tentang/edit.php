@@ -35,6 +35,7 @@ if (!$d) {
                 </div>
                 <div class="p-4">
                     <form action="proses.php" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="mb-4">
                             <label class="form-label fw-bold text-dark">Isi Tentang Sekolah (Hanya Teks)</label>
                             <textarea name="isi" class="form-control rounded-4" rows="12" required><?= htmlspecialchars($d['isi']); ?></textarea>
@@ -43,7 +44,8 @@ if (!$d) {
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" name="update" class="btn-primary-Dukuhbenda 02 px-5 shadow-sm">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" name="update" class="btn-primary-dukuhbenda02 px-5 shadow-sm">
                                 Simpan Perubahan
                             </button>
                         </div>

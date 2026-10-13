@@ -19,16 +19,16 @@ include '../../cek_session.php'; ?>
         <div class="content-main">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3 class="fw-bold text-dark m-0">Data Tenaga Pengajar</h3>
-                <a href="tambah.php" class="btn-primary-Dukuhbenda 02 text-decoration-none">
+                <a href="tambah.php" class="btn btn-primary-dukuhbenda02 text-decoration-none">
                     <i class="bi bi-person-plus-fill me-2"></i> Tambah Guru
                 </a>
             </div>
 
-            <div class="card-Dukuhbenda 02">
+            <div class="card-dukuhbenda02">
                 <div class="card-header-blue">
                     <h5 class="mb-0 fw-bold"><i class="bi bi-people-fill me-2"></i> Daftar Guru SDN Dukuhbenda 02</h5>
                 </div>
-                <div class="card-Dukuhbenda 02-body p-0">
+                <div class="card-dukuhbenda02-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-light">
@@ -59,7 +59,7 @@ include '../../cek_session.php'; ?>
                                         </td>
                                         <td class="fw-semibold">
                                             <?= $d['nama']; ?><br>
-                                            <small class="text-muted" style="font-size: 10px;">ID: <?= $d['id_guru']; ?> | Oleh: <?= $d['username']; ?></small>
+                                            <small class="text-muted" style="font-size: 10px;">Oleh: <?= $d['username']; ?></small>
                                         </td>
                                         <td><span class="badge bg-secondary rounded-pill px-3"><?= $d['jabatan']; ?></span></td>
                                         <td class="text-center">

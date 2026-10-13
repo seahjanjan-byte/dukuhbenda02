@@ -10,9 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isi_pesan = mysqli_real_escape_string($conn, $_POST['isi_pesan']);
     $tanggal   = date('Y-m-d H:i:s');
 
+    $result_id = mysqli_query(
+        $conn,
+        "SELECT id_pesan FROM pesan
+         WHERE id_pesan LIKE 'PSN%'
+         ORDER BY CAST(SUBSTRING(id_pesan, 4) AS UNSIGNED) DESC
+         LIMIT 1"
+    );
+    $last_id = mysqli_fetch_assoc($result_id);
+    $next_number = $last_id ? (int) substr($last_id['id_pesan'], 3) + 1 : 1;
+    $id_pesan = 'PSN' . str_pad((string) $next_number, 3, '0', STR_PAD_LEFT);
+
     // Query untuk menyimpan pesan ke tabel pesan
-    $query = "INSERT INTO pesan (nama, email, telepon, subjek, isi_pesan, tanggal, status, is_pinned) 
-              VALUES ('$nama', '$email', '$telepon', '$subjek', '$isi_pesan', '$tanggal', 'aktif', '0')";
+    $query = "INSERT INTO pesan (id_pesan, nama, email, telepon, subjek, isi_pesan, tanggal, status, is_pinned)
+              VALUES ('$id_pesan', '$nama', '$email', '$telepon', '$subjek', '$isi_pesan', '$tanggal', 'belum', '0')";
 
     if (mysqli_query($conn, $query)) {
         // Berhasil: Kembali ke beranda dengan parameter status untuk memicu SweetAlert2

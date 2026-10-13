@@ -4,6 +4,8 @@ include '../../cek_session.php';
 include '../../upload_helper.php';
 include '../../database_helper.php';
 
+require_valid_csrf_token();
+
 if (isset($_POST['update'])) {
     $admin_id = $_SESSION['admin_id'] ?? '';
     $isi      = $_POST['isi'] ?? '';
@@ -23,9 +25,9 @@ if (isset($_POST['update'])) {
         remove_uploaded_file($path, $old['gambar'] ?? null);
 
         // 2. Upload gambar baru
-        $success = db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE kategori = ?", 'ssis', [$isi, $nama_file, $admin_id, 'sejarah']);
+        $success = db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE kategori = ?", 'ssss', [$isi, $nama_file, $admin_id, 'sejarah']);
     } else {
-        $success = db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sis', [$isi, $admin_id, 'sejarah']);
+        $success = db_execute($conn, "UPDATE profil SET isi = ?, id_admin = ? WHERE kategori = ?", 'sss', [$isi, $admin_id, 'sejarah']);
     }
 
     if ($success) {

@@ -75,6 +75,7 @@ if (mysqli_num_rows($query) < 1) {
                         </div>
 
                         <div class="d-flex justify-content-end border-top pt-4">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
                             <button type="submit" name="update" class="btn-primary-dukuhbenda02 shadow-sm">
                                 <i class="bi bi-check-circle me-2"></i> Simpan Perubahan
                             </button>

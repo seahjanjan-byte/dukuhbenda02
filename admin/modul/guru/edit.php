@@ -26,6 +26,7 @@ $data = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM guru WHERE id_guru
                 </div>
                 <div class="card-Dukuhbenda 02-body p-4">
                     <form action="proses.php?aksi=edit" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <input type="hidden" name="id" value="<?= $data['id_guru']; ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nama Lengkap & Gelar</label>
@@ -42,8 +43,8 @@ $data = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM guru WHERE id_guru
                             <div class="form-text small">*Biarkan kosong jika tidak ingin mengganti foto.</div>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="index.php" class="btn-secondary-Dukuhbenda 02 text-decoration-none">Batal</a>
-                            <button type="submit" class="btn-primary-Dukuhbenda 02">Simpan Perubahan</button>
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>

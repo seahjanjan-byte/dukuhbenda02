@@ -6,7 +6,7 @@ include '../../database_helper.php';
 
 require_valid_csrf_token();
 
-$aksi     = $_POST['aksi'] ?? '';
+$aksi     = $_POST['aksi'] ?? $_GET['aksi'] ?? '';
 $path     = "../../../assets/img/";
 $id_admin = $_SESSION['admin_id'] ?? '';
 
@@ -33,7 +33,7 @@ if ($aksi == 'tambah') {
         }
     }
 
-    db_execute($conn, "INSERT INTO ppdb (id_ppdb, id_admin, gambar, status) VALUES (?, ?, ?, ?)", 'siss', [$id_baru, $id_admin, $nama_file, $status]);
+    db_execute($conn, "INSERT INTO ppdb (id_ppdb, id_admin, gambar, status) VALUES (?, ?, ?, ?)", 'ssss', [$id_baru, $id_admin, $nama_file, $status]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'edit') {
@@ -52,9 +52,9 @@ if ($aksi == 'tambah') {
 
         remove_uploaded_file($path, $old['gambar'] ?? null);
 
-        db_execute($conn, "UPDATE ppdb SET gambar = ?, status = ?, id_admin = ? WHERE id_ppdb = ?", 'ssis', [$nama_file, $status, $id_admin, $id]);
+        db_execute($conn, "UPDATE ppdb SET gambar = ?, status = ?, id_admin = ? WHERE id_ppdb = ?", 'ssss', [$nama_file, $status, $id_admin, $id]);
     } else {
-        db_execute($conn, "UPDATE ppdb SET status = ?, id_admin = ? WHERE id_ppdb = ?", 'sis', [$status, $id_admin, $id]);
+        db_execute($conn, "UPDATE ppdb SET status = ?, id_admin = ? WHERE id_ppdb = ?", 'sss', [$status, $id_admin, $id]);
     }
     header("Location: index.php");
     exit();
@@ -62,7 +62,7 @@ if ($aksi == 'tambah') {
     $id  = $_POST['id'] ?? '';
     $set = $_POST['set'] ?? '';
 
-    db_execute($conn, "UPDATE ppdb SET status = ?, id_admin = ? WHERE id_ppdb = ?", 'sis', [$set, $id_admin, $id]);
+    db_execute($conn, "UPDATE ppdb SET status = ?, id_admin = ? WHERE id_ppdb = ?", 'sss', [$set, $id_admin, $id]);
     header("Location: index.php");
     exit();
 } elseif ($aksi == 'hapus') {

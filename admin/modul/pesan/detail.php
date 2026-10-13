@@ -90,10 +90,7 @@ if (substr($wa_number, 0, 1) === '0') {
                         </div>
                     </div>
 
-                    <div class="mt-5 d-flex justify-content-between align-items-center border-top pt-4">
-                        <div>
-                            <span class="text-muted small italic">ID Pesan: #<?= $d['id_pesan']; ?></span>
-                        </div>
+                    <div class="mt-5 d-flex justify-content-end align-items-center border-top pt-4">
                         <div class="d-flex gap-2">
                             <form method="POST" action="proses.php" class="d-inline">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($d['id_pesan'], ENT_QUOTES, 'UTF-8'); ?>">

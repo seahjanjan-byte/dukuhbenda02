@@ -60,7 +60,7 @@ include '../../cek_session.php'; ?>
                                         <td>
                                             <div class="fw-semibold"><?= $d['judul_prestasi']; ?></div>
                                             <small class="text-muted" style="font-size: 10px;">
-                                                ID: <?= $d['id_prestasi']; ?> | Mentor: <?= $d['nama_guru'] ?? 'Tanpa Pembimbing'; ?>
+                                                Mentor: <?= $d['nama_guru'] ?? 'Tanpa Pembimbing'; ?>
                                             </small>
                                         </td>
                                         <td><span class="badge bg-info"><?= ucfirst($d['kategori']); ?></span></td>

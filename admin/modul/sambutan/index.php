@@ -42,13 +42,14 @@ if (!$d) {
                     <?php endif; ?>
 
                     <form action="proses.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <input type="hidden" name="id" value="<?= $d['id_profil']; ?>">
 
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 <label class="fw-bold d-block mb-3">Foto Kepala Sekolah</label>
                                 <img src="../../../assets/img/<?= $d['gambar']; ?>" class="img-fluid rounded-4 shadow-sm border mb-3" style="max-height: 250px; width: 100%; object-fit: cover;">
-                                <input type="file" name="gambar" class="form-control rounded-pill">
+                                <input type="file" name="gambar" class="form-control rounded-pill" accept="image/*">
                                 <div class="form-text small text-muted">*Gunakan foto portrait (3x4/4x6)</div>
                             </div>
                             <div class="col-md-8">

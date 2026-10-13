@@ -56,7 +56,7 @@ include '../../cek_session.php';
                                         </td>
                                         <td class="fw-semibold text-capitalize">
                                             <?= $d['nama_fasilitas']; ?><br>
-                                            <small class="text-muted" style="font-size: 10px;">ID: <?= $d['id_fasilitas']; ?> | Oleh: <?= $d['username']; ?></small>
+                                            <small class="text-muted" style="font-size: 10px;">Oleh: <?= $d['username']; ?></small>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group shadow-sm">

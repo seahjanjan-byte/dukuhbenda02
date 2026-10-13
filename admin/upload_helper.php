@@ -1,13 +1,17 @@
 <?php
 
-function store_uploaded_image(array $file, string $directory): string|false
+function store_uploaded_file(array $file, string $directory, array $allowedMimeTypes = []): string|false
 {
-    $allowedMimeTypes = [
+    $defaultAllowedMimeTypes = [
         'jpg' => 'image/jpeg',
         'jpeg' => 'image/jpeg',
         'png' => 'image/png',
+        'gif' => 'image/gif',
         'webp' => 'image/webp',
+        'pdf' => 'application/pdf',
     ];
+
+    $allowedMimeTypes = $allowedMimeTypes ?: $defaultAllowedMimeTypes;
 
     if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
         return false;
@@ -39,7 +43,7 @@ function store_uploaded_image(array $file, string $directory): string|false
         return false;
     }
 
-    if (@getimagesize($temporaryPath) === false) {
+    if ($extension !== 'pdf' && @getimagesize($temporaryPath) === false) {
         return false;
     }
 
@@ -58,6 +62,11 @@ function store_uploaded_image(array $file, string $directory): string|false
     }
 
     return $safeName;
+}
+
+function store_uploaded_image(array $file, string $directory): string|false
+{
+    return store_uploaded_file($file, $directory);
 }
 
 function remove_uploaded_file(string $directory, ?string $fileName): void

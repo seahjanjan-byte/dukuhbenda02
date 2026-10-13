@@ -2,7 +2,7 @@
 include '../../../config/config.php';
 include '../../cek_session.php';
 $id = $_GET['id'];
-$d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE id='$id'"));
+$d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE id_profil='$id'"));
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -24,7 +24,8 @@ $d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE id='$id'
                 </div>
                 <div class="p-4">
                     <form action="proses.php?aksi=edit" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?= $d['id']; ?>">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" name="id" value="<?= $d['id_profil']; ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Judul Profil</label>
                             <input type="text" name="judul" class="form-control" value="<?= $d['judul']; ?>" readonly>
@@ -46,8 +47,8 @@ $d = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM profil WHERE id='$id'
                             </div>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="index.php" class="btn btn-secondary">Batal</a>
-                            <button type="submit" class="btn-primary-Dukuhbenda 02">Update Profil</button>
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02">Update Profil</button>
                         </div>
                     </form>
                 </div>

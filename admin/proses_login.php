@@ -35,7 +35,7 @@ if ($data) {
         $updateStmt = mysqli_prepare($conn, "UPDATE admin SET password = ? WHERE id_admin = ?");
 
         if ($updateStmt) {
-            mysqli_stmt_bind_param($updateStmt, 'si', $newPasswordHash, $data['id_admin']);
+            mysqli_stmt_bind_param($updateStmt, 'ss', $newPasswordHash, $data['id_admin']);
             $loginValid = mysqli_stmt_execute($updateStmt);
             mysqli_stmt_close($updateStmt);
         }

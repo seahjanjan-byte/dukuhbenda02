@@ -37,6 +37,7 @@ $nama_kategori = isset($label[$kat]) ? $label[$kat] : 'Profil Baru';
                 </div>
                 <div class="p-4">
                     <form action="proses.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <input type="hidden" name="kategori" value="<?= $kat; ?>">
 
                         <?php if ($kat == 'visi' || $kat == 'misi'): ?>
@@ -69,8 +70,8 @@ $nama_kategori = isset($label[$kat]) ? $label[$kat] : 'Profil Baru';
                         <?php endif; ?>
 
                         <div class="d-flex justify-content-end gap-2 border-top pt-4">
-                            <a href="index.php" class="btn btn-secondary px-4 rounded-pill">Batal</a>
-                            <button type="submit" class="btn-primary-Dukuhbenda 02 px-5">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02 px-5">
                                 <i class="bi bi-check-circle me-2"></i> Simpan Konten
                             </button>
                         </div>

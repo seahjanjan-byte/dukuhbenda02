@@ -1,10 +1,10 @@
 <?php
 // Path absolut agar link tidak pecah di level folder mana pun
 include_once __DIR__ . '/../config/config.php';
-$base_url_admin = "/sdn-dukuhbenda02/admin/";
+$base_url_admin = rtrim($base_url, '/') . '/admin/';
 ?>
 
-<link rel="stylesheet" href="/sdn-dukuhbenda02/assets/css/style.css">
+<link rel="stylesheet" href="<?= htmlspecialchars($base_url . 'assets/css/style.css', ENT_QUOTES, 'UTF-8'); ?>">
 
 <div class="sidebar-dukuhbenda02 d-flex flex-column p-3">
     <div class="text-center mb-4 py-4">

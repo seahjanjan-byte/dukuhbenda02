@@ -4,6 +4,8 @@ include '../../cek_session.php';
 include '../../upload_helper.php';
 include '../../database_helper.php';
 
+require_valid_csrf_token();
+
 if (isset($_POST['update'])) {
     $id_admin  = $_SESSION['admin_id'] ?? '';
     $id_profil = $_POST['id'] ?? '';
@@ -38,7 +40,7 @@ if (isset($_POST['update'])) {
         $success = db_execute($conn, "UPDATE profil SET isi = ?, gambar = ?, id_admin = ? WHERE kategori = ?", 'ssss', [$isi, $nama_file, $id_admin, 'sambutan']);
     } else {
         // Logika INSERT: Gunakan ID String khusus
-        $success = db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi, gambar) VALUES (?, ?, ?, ?, ?, ?)", 'sissss', ['PFL_SAMBUTAN', $id_admin, 'sambutan', 'Sambutan Kepala Sekolah', $isi, $nama_file]);
+        $success = db_execute($conn, "INSERT INTO profil (id_profil, id_admin, kategori, judul, isi, gambar) VALUES (?, ?, ?, ?, ?, ?)", 'ssssss', ['PFL_SAMBUTAN', $id_admin, 'sambutan', 'Sambutan Kepala Sekolah', $isi, $nama_file]);
     }
 
     if ($success) {

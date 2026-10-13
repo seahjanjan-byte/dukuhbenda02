@@ -21,6 +21,7 @@ include '../../cek_session.php'; ?>
                 </div>
                 <div class="p-4">
                     <form action="proses.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Judul Kegiatan</label>
                             <input type="text" name="judul" class="form-control" placeholder="Contoh: Lomba 17 Agustus 2025" required>
@@ -44,12 +45,12 @@ include '../../cek_session.php'; ?>
                         </div>
                         <div class="mb-4" id="input_sumber">
                             <label class="form-label fw-bold" id="label_sumber">Pilih File</label>
-                            <input type="file" name="file_sumber" id="file_input" class="form-control">
-                            <input type="text" name="url_sumber" id="url_input" class="form-control d-none" placeholder="Tempel link di sini...">
+                            <input type="file" name="file_sumber" id="file_input" class="form-control" accept="image/*">
+                            <input type="url" name="url_sumber" id="url_input" class="form-control d-none" placeholder="Tempel link di sini...">
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="index.php" class="btn btn-secondary-Dukuhbenda 02 text-decoration-none">Batal</a>
-                            <button type="submit" class="btn-primary-Dukuhbenda 02">
+                            <a href="index.php" class="btn-cancel-dukuhbenda02 me-2">Batal</a>
+                            <button type="submit" class="btn-primary-dukuhbenda02">
                                 <i class="bi bi-check-circle me-2"></i> Simpan Media
                             </button>
                         </div>

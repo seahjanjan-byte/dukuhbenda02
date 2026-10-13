@@ -53,7 +53,7 @@ $sql = mysqli_query($conn, "SELECT pengumuman.*, admin.username FROM pengumuman
                                         <td class="px-4 fw-bold"><?= $no++; ?></td>
                                         <td>
                                             <div class="fw-semibold"><?= $d['judul']; ?></div>
-                                            <small class="text-muted" style="font-size: 10px;">ID: <?= $d['id_pengumuman']; ?> | Oleh: <?= $d['username']; ?></small><br>
+                                            <small class="text-muted" style="font-size: 10px;">Oleh: <?= $d['username']; ?></small><br>
                                             <?php if (!empty($d['dokumen'])): ?>
                                                 <small class="text-danger fw-bold"><i class="bi bi-file-earmark-pdf"></i> Ada Lampiran</small>
                                             <?php endif; ?>

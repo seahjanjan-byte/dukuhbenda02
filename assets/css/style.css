@@ -28,6 +28,13 @@
   --surface-warm: #fffaf0;
   --primary-navy: #0b1f36;
   --accent-amber: #d6a62c;
+  --navbar-height: 88px;
+}
+
+@media (max-width: 991.98px) {
+  :root {
+    --navbar-height: 74px;
+  }
 }
 
 /* 3. Layout Dasar */
@@ -112,22 +119,33 @@ main,
 /* ========================================== 
    HEADER / NAVBAR STYLE
    ========================================== */
+.page-hero-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  min-height: 100vh;
+}
+
 .navbar {
+  flex: none;
+  position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 1.5rem 0 !important;
-  background-color: transparent !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(11, 31, 54, 0.08) !important;
+  z-index: 10;
 }
 
 .navbar.navbar-transparent {
-  background-color: transparent !important;
+  background-color: #ffffff !important;
   background-image: none !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 20px rgba(11, 31, 54, 0.08) !important;
 }
 
 .navbar.navbar-transparent .navbar-brand,
 .navbar.navbar-transparent .nav-link {
-  color: #ffffff !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  color: #2c3e50 !important;
+  text-shadow: none;
 }
 
 .navbar.scrolled {
@@ -137,7 +155,7 @@ main,
 }
 
 .navbar.scrolled .navbar-brand {
-  color: var(--primary-blue) !important;
+  color: #2c3e50 !important;
 }
 
 .navbar.scrolled .nav-link {
@@ -145,9 +163,10 @@ main,
   text-shadow: none !important;
 }
 
-.navbar-transparent .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5);
-  filter: brightness(0) invert(1);
+.navbar-transparent .navbar-toggler,
+.navbar.scrolled .navbar-toggler {
+  border-color: rgba(44, 62, 80, 0.2);
+  filter: none;
 }
 
 /* ========================================== 
@@ -208,6 +227,23 @@ main,
   background-color: var(--primary-light);
   color: var(--white);
   box-shadow: 0 4px 12px rgba(11, 31, 54, 0.22);
+}
+
+.btn-cancel-dukuhbenda02 {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-cancel-dukuhbenda02:hover {
+  background-color: var(--primary-blue);
+  color: var(--white);
 }
 
 .btn-secondary-dukuhbenda02 {
@@ -560,6 +596,10 @@ main,
   padding-top: 5rem !important;
 }
 
+.home-section + .home-section {
+  margin-top: 1rem;
+}
+
 .text-navy {
   color: var(--navy) !important;
 }
@@ -836,8 +876,12 @@ h4.text-primary::after {
 /* Editorial school portal homepage */
 .editorial-hero {
   background: #f6f8f5;
-  min-height: 720px;
-  padding-top: 5rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .hero-editorial-copy {
@@ -1141,9 +1185,19 @@ h4.text-primary::after {
 }
 
 @media (max-width: 575.98px) {
+  .page-hero-shell {
+    min-height: 100svh;
+    min-height: 100vh;
+  }
+
+  .editorial-hero {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .editorial-carousel .hero-slide {
-    height: 420px !important;
-    min-height: 420px;
+    height: clamp(320px, 52svh, 420px) !important;
+    min-height: 320px;
   }
 
   .editorial-carousel .hero-content {
